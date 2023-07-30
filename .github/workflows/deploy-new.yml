@@ -38,7 +38,9 @@ jobs:
           npm list -g --depth 0
 
       - name: Build React App
-        run: npm install && CI=false npm run build
+        run: |
+          echo "test" > ./build/test.txt
+          echo "npm install && CI=false npm run build"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
