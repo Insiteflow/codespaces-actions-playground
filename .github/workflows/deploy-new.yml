@@ -36,6 +36,9 @@ jobs:
           npm list -g --depth 0
 
       - name: Build React App
+        env:
+          S3_BUCKET: ${{format('insiteflow-{0}-vpi-prod-frontend', github.event.inputs.facility)}}
+          CLOUDFRONT_ID_VAR: ${{format('Cloudfront_Id-{0}', github.event.inputs.facility)}}
         run: |
           mkdir build
           touch build/test.txt
