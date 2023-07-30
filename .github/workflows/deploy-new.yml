@@ -27,7 +27,8 @@ jobs:
           REACT_APP_API_URL: ${{format('https://{0}-api.vpi-cust.insiteflow.io/api/v1', github.event.inputs.facility)}}
         run: |
           echo "Setting env file entry REACT_APP_API_URL to be ${{env.REACT_APP_API_URL}}"
-          echo "REACT_APP_API_URL=${{env.REACT_APP_API_URL}}" > .env 
+          echo "REACT_APP_API_URL=${{env.REACT_APP_API_URL}}" > .env
+          cat .env
 
       - name: install latest npm
         run: |
