@@ -15,6 +15,7 @@ permissions:
 jobs:
   deploy:
     name: Deploy
+    if: ${{!!fromJson(vars.CLOUDFRONT_IDS)[github.event.inputs.facility]}}
     runs-on: ubuntu-latest
     environment: Production
 
