@@ -40,6 +40,10 @@ jobs:
           mkdir build
           touch build/test.txt
           echo "npm install && CI=false npm run build"
+          echo "Setting app build bucket to be ${{env.S3_BUCKET}}"
+          echo "CLOUDFRONT_ID_VAR=${{env.COUDFRONT_ID_VAR}}"
+          echo "CLOUDFRONT_ID=${{vars.CLOUDFRONT_ID_VAR}}"
+          echo "Setting cloud formation ditribution to be $CLOUDFRONT_ID"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
