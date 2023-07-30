@@ -39,6 +39,7 @@ jobs:
 
       - name: Build React App
         run: |
+          mkdir build
           touch build/test.txt
           echo "npm install && CI=false npm run build"
 
