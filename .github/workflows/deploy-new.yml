@@ -20,6 +20,12 @@ jobs:
     environment: Production
 
     steps:
+      - name: Validate
+        if: ${{!fromJson(vars.CLOUDFRONT_IDS)[github.event.inputs.facility]}}
+        run: |
+          echo "Missing Facility Id in Config"
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v2
 
