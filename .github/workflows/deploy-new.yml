@@ -50,7 +50,7 @@ jobs:
 
       - name: Deploy app build to S3 bucket
         env:
-          S3_BUCKET: ${{format('insiteflow-{0}-vpi-prod-frontend', github.event.inputs.facility)
+          S3_BUCKET: ${{format('insiteflow-{0}-vpi-prod-frontend', github.event.inputs.facility)}}
         run: |
           echo "Setting app build bucket to be ${{env.S3_BUCKET}}"
           aws s3 sync ./build/ s3://${{env.S3_BUCKET}} --delete
