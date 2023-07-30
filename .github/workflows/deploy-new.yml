@@ -45,7 +45,7 @@ jobs:
           echo "npm install && CI=false npm run build"
           echo "Setting app build bucket to be ${{env.S3_BUCKET}}"
           echo "CLOUDFRONT_ID_VAR=${{env.CLOUDFRONT_ID_VAR}}"
-          echo "CLOUDFRONT_ID=${{vars[$CLOUDFRONT_ID_VAR]}}"
+          echo "CLOUDFRONT_ID=${{vars[CLOUDFRONT_ID_VAR]}}"
           echo $CLOUDFRONT_ID
 
       - name: Configure AWS Credentials
