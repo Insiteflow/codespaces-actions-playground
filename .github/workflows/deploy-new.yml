@@ -8,8 +8,6 @@ on:
         description: "Facility Id Prefix"
         required: true
         type: string
-env:
-  AWS_REGION: us-east-1
 permissions:
   id-token: write
   contents: write
@@ -46,7 +44,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: $AWS_REGION
+          aws-region: us-east-1
           role-to-assume: arn:aws:iam::360761307738:role/GithubDeployment
           role-session-name: GithubDeployment
 
