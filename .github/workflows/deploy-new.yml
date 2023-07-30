@@ -44,7 +44,7 @@ jobs:
           touch build/test.txt
           echo "npm install && CI=false npm run build"
           echo "Setting app build bucket to be ${{env.S3_BUCKET}}"
-          echo "CLOUDFRONT_ID_VAR=${{env.COUDFRONT_ID_VAR}}"
+          echo "CLOUDFRONT_ID_VAR=${{env.CLOUDFRONT_ID_VAR}}"
           echo "CLOUDFRONT_ID=${{vars.CLOUDFRONT_ID_VAR}}"
           echo "Setting cloud formation ditribution to be $CLOUDFRONT_ID"
 
@@ -67,7 +67,7 @@ jobs:
         env:
           CLOUDFRONT_ID_VAR: ${{format('Cloudfront_Id-{0}', github.event.inputs.facility)}}
         run: |
-          echo "CLOUDFRONT_ID_VAR=${{env.COUDFRONT_ID_VAR}}"
+          echo "CLOUDFRONT_ID_VAR=${{env.CLOUDFRONT_ID_VAR}}"
           echo "CLOUDFRONT_ID=${{vars.CLOUDFRONT_ID_VAR}}"
           echo "Setting cloud formation ditribution to be $CLOUDFRONT_ID"
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
