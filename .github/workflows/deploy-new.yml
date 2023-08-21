@@ -35,16 +35,16 @@ jobs:
           echo "Setting env file entry REACT_APP_API_URL to be ${{env.REACT_APP_API_URL}}"
           echo "REACT_APP_API_URL=${{env.REACT_APP_API_URL}}" > .env
           cat .env
-      - name: Fast Envsubst
-        uses: mshick/fast-envsubst@v1
+      - name: Prepare Task Definition
+        uses: nowactions/envsubst@v1
         with:
-          in-file: ./.aws/task-definition.json.tmpl
-          out-file: ./.aws/task-definition.json
+          input: ./.aws/task-definition.json.tmpl
+          output: ./.aws/task-definition.json
         env:
           ENVIRONMENT: prod
-          FACILITY_ID: ${{ github.event.inputs.facility }}
           AWS_REGION: us-east-1
           AWS_ACCOUNT_ID: 360761307738
+          FACILITY_ID: ${{ github.event.inputs.facility }}
           FACILITY_SECRETS_ID: backend-saTDSN
           COMMON_SECRETS_ID: common-creds-rS84A6
       - name: Show contents of new task-definition.json
