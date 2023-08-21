@@ -26,7 +26,7 @@ jobs:
           output: ../../aws/task-definition.json
         env:
           ENVIRONMENT: prod
-          FACILITY_ID: ${{ facility }}
+          FACILITY_ID: ${{ github.event.inputs.facility }}
           AWS_REGION: us-east-1
           AWS_ACCOUNT_ID: 360761307738
           FACILITY_SECRETS_ID: backend-saTDSN
