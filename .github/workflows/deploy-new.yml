@@ -19,11 +19,11 @@ jobs:
     environment: Production
 
     steps:
-      - name: Create Template JSON
-        uses: nowactions/envsubst@v1
+      - name: Fast Envsubst
+        uses: mshick/fast-envsubst@v1
         with:
-          input: ./task-def.json.tmpl
-          output: ./task-definition.json
+          in-file: ./.aws/task-definition.json.tmpl
+          out-file: ./.aws/task-definition.json
         env:
           ENVIRONMENT: prod
           FACILITY_ID: ${{ github.event.inputs.facility }}
@@ -33,7 +33,7 @@ jobs:
           COMMON_SECRETS_ID: common-creds-rS84A6
       - name: Show contents of new task-definition.json
         run:
-          cat ./task-definition.json
+          cat ./.aws/task-definition.json
       - name: Validate
         if: ${{!fromJson(vars.CLOUDFRONT_IDS)[github.event.inputs.facility]}}
         run: |
