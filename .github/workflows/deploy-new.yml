@@ -9,7 +9,7 @@ on:
         type: choice
         description: "Which Environment"
         required: true
-        options: 
+        options:
         - cert
         - prod
       facility:
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Validate
-        if: ${{!fromJson(vars.CLOUDFRONT_IDS)[github.event.inputs.facility]}}
+        if: ${{ !fromJson(vars.BACKEND_CONFIG)[github.event.inputs.env]['facilities'][github.event.inputs.facility] }}
         run: |
           echo "Missing Facility Id in Config"
           exit 1
@@ -51,10 +51,10 @@ jobs:
         env:
           ENVIRONMENT: ${{ github.event.inputs.env }}
           AWS_REGION: us-east-1
-          AWS_ACCOUNT_ID: 360761307738
+          AWS_ACCOUNT_ID: ${{ fromJson(vars.BACKEND_CONFIG)[github.event.inputs.env]['aws_account_id'] }}
           FACILITY_ID: ${{ github.event.inputs.facility }}
-          FACILITY_SECRETS_ID: backend-saTDSN
-          COMMON_SECRETS_ID: common-creds-rS84A6
+          FACILITY_SECRETS_ID: fromJson(vars.BACKEND_CONFIG)[github.event.inputs.env]['facilities'][github.event.inputs.facility]['secrets_id']
+          COMMON_SECRETS_ID: ${{ fromJson(vars.BACKEND_CONFIG)[github.event.inputs.env]['common_secrets_id'] }}
       - name: Show contents of new task-definition.json
         run: |
           cat ./.aws/task-definition.json
