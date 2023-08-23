@@ -1,9 +1,17 @@
-name: Deploy to production
+name: Deploy
+run-name: Deploy to ${{ github.event.inputs.env }} ${{github.event.inputs.facility }} by @${{ github.actor }}
 on:
   workflow_dispatch:
     branches:
       - 'main'
     inputs:
+      env:
+        type: choice
+        description: "Which Environment"
+        required: true
+        options: 
+        - cert
+        - prod
       facility:
         description: "Facility Id Prefix"
         required: true
@@ -41,7 +49,7 @@ jobs:
           input: ./.aws/task-definition.json.tmpl
           output: ./.aws/task-definition.json
         env:
-          ENVIRONMENT: prod
+          ENVIRONMENT: ${{ github.event.inputs.env }}
           AWS_REGION: us-east-1
           AWS_ACCOUNT_ID: 360761307738
           FACILITY_ID: ${{ github.event.inputs.facility }}
